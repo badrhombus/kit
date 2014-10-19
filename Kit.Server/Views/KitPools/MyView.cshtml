@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Kit.Server.Models.KitPool>
+
+
+@{
+    ViewBag.Title = "Project Pools";
+}
+
+
+@{
+    var kitname = Model.FirstOrDefault().KitName;
+    kitname = kitname.Substring(0, kitname.IndexOf('-'));
+
+}
+
+
+<h2>Active Project Pools for @kitname</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.JQueryUI().Button("Upload Poolsheet", ButtonElement.Button, ButtonType.Button, null)
+
+<h2>@Html.DisplayNameFor(model => model.KitName)</h2>
+<ul id="sortable">
+    @foreach (var item in Model)
+    {
+        //<li> @Html.DisplayFor(modelItem => item.KitName) </li>
+        <li> @Html.ActionLink(item.KitName, "Details", new { id = item.Id })</li>
+    }
+</ul>
+
+
+@section Scripts {
+    <script>
+    $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+    </script>
+
+}
+
+@*--------------CRAP ----------------------
+
+    <script>
+        $(function () {
+            $("#sortable2").sortable();
+            $("#sortable2").disableSelection();
+        });
+    </script>
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KitName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }*@

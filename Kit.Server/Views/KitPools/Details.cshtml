@@ -1,0 +1,68 @@
+﻿@using Kit.Server.Models
+@model Kit.Server.Models.KitPool
+
+@{
+    ViewBag.Title = "Details";
+}
+<style type="text/css">.dynamicsparkline { }</style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>KitPool</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="col-md-3">
+            @Html.DisplayNameFor(model => model.KitName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KitName)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <p>Kit Conjugations</p>
+    <table class="col-md-4">
+        <tr>
+            <th>Bead</th>
+            <th>Probe</th>
+        </tr>
+        @{ var bead = -1;
+         string displaybead = "";}
+
+        @foreach (var item in Model.KitConjugations)
+        {
+            <tr>
+                <td>
+                    @{var conjugation = item;}
+                    @{
+            if (conjugation.Bead != bead)
+            {
+                bead = conjugation.Bead;
+                @Html.ActionLink(bead.ToString(), "index", new { id = item.Id })
+            }
+                    }
+                </td>
+                <td>
+                    <span class="dynamicbar">1,3,4,5,3,5</span>
+                </td>
+
+                <td>
+                    @Html.ActionLink(conjugation.ProbeName, "index", new { id = item.Id })
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Edit", "index", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "index", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "index", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to " + Model.KitName, "Index")
+</p>

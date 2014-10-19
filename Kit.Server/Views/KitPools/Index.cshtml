@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Kit.Server.Models.KitPool>
+
+@{
+    ViewBag.Title = "LABType® SSO Typing Tests";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Development</h2>
+        <p>Kits in development</p>
+
+       
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.KitName)
+                </th>
+                
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.KitName, "Details", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+<h2>LABType</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@* ----------------------------------------------CRAP-----------------------------------------------------------*@
+
+@*<canvas id="barChartLoc" height="300" width="250"></canvas>
+
+    <script>
+        var barChartLocData = {
+            labels: ["","","","",""],
+            datasets: [{ fillColor: "yellow", strokeColor: "blue", data: [15, 20, 35, 12, 24] }]
+        };
+        var mybarChartLoc = new Chart(document.getElementById("barChartLoc").getContext("2d")).Bar(barChartLocData, { barValueSpacing: 10 });
+
+            </script>*@
+
+@*<p><a class="btn btn-default" href="@Url.Action("Index","KitPools")">Simple Kits &raquo;</a></p>*@
