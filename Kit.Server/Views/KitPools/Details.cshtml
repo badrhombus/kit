@@ -4,7 +4,10 @@
 @{
     ViewBag.Title = "Details";
 }
-<style type="text/css">.dynamicsparkline { }</style>
+<style type="text/css">
+    .dynamicsparkline {
+    }
+</style>
 
 <h2>Details</h2>
 
@@ -36,16 +39,15 @@
             <tr>
                 <td>
                     @{var conjugation = item;}
-                    @{
-            if (conjugation.Bead != bead)
-            {
-                bead = conjugation.Bead;
-                @Html.ActionLink(bead.ToString(), "index", new { id = item.Id })
-            }
+                    @{if (conjugation.Bead != bead)
+                        {
+                            bead = conjugation.Bead;
+                            @Html.ActionLink(bead.ToString(), "index", new { id = item.Id })
+                        }
                     }
                 </td>
                 <td>
-                    <span class="dynamicbar"><i class="fa fa-camera"></i></span>
+                    <div class="dynamicbar txt-color-greenDark hidden-mobile hidden-md hidden-sm"><i class="fa fa-spinner fa-spin"></i></div>
                 </td>
 
                 <td>
