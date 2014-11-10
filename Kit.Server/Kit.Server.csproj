@@ -254,15 +254,19 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Allele.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KitModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Controllers\NomenclaturesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Models\Nomenclature.cs" />
+    <Compile Include="Models\ProbeModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\ProbesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Products.txt" />
@@ -448,10 +452,14 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\KitPools\MyView.cshtml" />
+    <Content Include="Views\Probes\Create.cshtml" />
+    <Content Include="Views\Probes\Delete.cshtml" />
+    <Content Include="Views\Probes\Details.cshtml" />
+    <Content Include="Views\Probes\Edit.cshtml" />
+    <Content Include="Views\Probes\Index.cshtml" />
+    <Content Include="Views\KitPools\BeadDetail.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Probe\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>

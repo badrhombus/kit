@@ -38,5 +38,7 @@ namespace Kit.Server.Models
         public System.Data.Entity.DbSet<Kit.Server.Models.Nomenclature> Nomenclatures { get; set; }
 
         public System.Data.Entity.DbSet<Kit.Server.Models.Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<Kit.Server.Models.Probe> Probes { get; set; }
     }
 }

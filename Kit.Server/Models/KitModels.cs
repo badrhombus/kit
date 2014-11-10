@@ -53,14 +53,7 @@ namespace Kit.Server.Models
         public int Bead { get; set; }
     }
 
-    [Serializable]
-    public class Nomenclature
-    {
-        [DataMember]
-        public int Id { get; set; }
-        [DataMember]
-        public string Version { get; set; }
-    }
+   
 
     
 

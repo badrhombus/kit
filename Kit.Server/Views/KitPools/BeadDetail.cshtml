@@ -1,49 +1,32 @@
-﻿@using Kit.Server.Models
-@model Kit.Server.Models.KitPool
+﻿@model Kit.Server.Models.KitPool
+
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "BeadDetail";
 }
-<style type="text/css">
-    .dynamicsparkline {
-    }
-</style>
 
-<h2>Details</h2>
+<h2>Bead Details</h2>
 
 <div>
-    <h4>KitPool</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="col-md-3">
-            @Html.DisplayNameFor(model => model.KitName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.KitName)
-        </dd>
-    </dl>
-</div>
-
-<div>
-    <p>Kit Conjugations</p>
+    <p>Bead Details</p>
     <table class="col-md-4">
         <tr>
             <th>Bead</th>
             <th>Probe</th>
         </tr>
-        @{ var bead = -1;
+        @{ var c = Model.KitConjugations.First(kc => kc.Id == 1);
          string displaybead = "";}
 
-        @foreach (var item in Model.KitConjugations)
+        @foreach (var item in Model.KitConjugations.Where(kc => kc.Bead == c.Bead))
         {
             <tr>
                 <td>
                     @{var conjugation = item;}
-                    @{if (conjugation.Bead != bead)
-                        {
-                            bead = conjugation.Bead;
-                            @Html.ActionLink(bead.ToString(), "BeadDetail", new { id = item.Id })
-                        }
+                    @{if (conjugation.Bead != c.Bead)
+                    {
+                        c.Bead = conjugation.Bead;
+                        @Html.ActionLink(c.Bead.ToString(), "BeadDetail", new { id = item.Id })
+                    }
                     }
                 </td>
                 <td>
@@ -64,7 +47,4 @@
         }
     </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to " + Model.KitName, "Index")
-</p>
+

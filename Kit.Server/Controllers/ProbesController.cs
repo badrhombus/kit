@@ -8,142 +8,112 @@ using System.Web;
 using System.Web.Mvc;
 using Kit.Server.Models;
 
-namespace Kit.Server.Controllers
+namespace Kit.Server.Views
 {
-    public class KitPoolsController : Controller
+    public class ProbesController : Controller
     {
         private LabTypeKitDbContext db = new LabTypeKitDbContext();
 
-        // GET: KitPools
-        [HttpGet]
+        // GET: Probes
         public ActionResult Index()
         {
-            var kpl = db.KitPools.ToList();
-            return View(kpl);
+            return View(db.Probes.ToList());
         }
 
-        // GET: KitPools/MyView/5
-        [HttpGet]
-        public ActionResult MyView(int? x)
-        {
-            var kpl = db.KitPools.ToList();
-            return View(kpl);
-        }
-
-        // GET: KitPools/Details/5
-        [HttpGet]
+        // GET: Probes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KitPool kitPool = db.KitPools.Find(id);
-            if (kitPool == null)
+            Probe probe = db.Probes.Find(id);
+            if (probe == null)
             {
                 return HttpNotFound();
             }
-            return View(kitPool);
+            return View(probe);
         }
 
-        // GET: KitPools/Create
-        [HttpGet]
+        // GET: Probes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: KitPools/Create
+        // POST: Probes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,KitName")] KitPool kitPool)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Probe probe)
         {
             if (ModelState.IsValid)
             {
-                db.KitPools.Add(kitPool);
+                db.Probes.Add(probe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(kitPool);
+            return View(probe);
         }
 
-        // GET: KitPools/Edit/5
+        // GET: Probes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KitPool kitPool = db.KitPools.Find(id);
-            if (kitPool == null)
+            Probe probe = db.Probes.Find(id);
+            if (probe == null)
             {
                 return HttpNotFound();
             }
-            return View(kitPool);
+            return View(probe);
         }
 
-        // POST: KitPools/Edit/5
+        // POST: Probes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,KitName")] KitPool kitPool)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Probe probe)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(kitPool).State = EntityState.Modified;
+                db.Entry(probe).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(kitPool);
+            return View(probe);
         }
 
-        // GET: KitPools/Delete/5
+        // GET: Probes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KitPool kitPool = db.KitPools.Find(id);
-            if (kitPool == null)
+            Probe probe = db.Probes.Find(id);
+            if (probe == null)
             {
                 return HttpNotFound();
             }
-            return View(kitPool);
+            return View(probe);
         }
 
-        // POST: KitPools/Delete/5
+        // POST: Probes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            KitPool kitPool = db.KitPools.Find(id);
-            db.KitPools.Remove(kitPool);
+            Probe probe = db.Probes.Find(id);
+            db.Probes.Remove(probe);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // GET: KitPools/BeadDetail/5
-        [HttpGet]
-        public ActionResult BeadDetail(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KitPool kitPool = db.KitPools.Find(id);
-            if (kitPool == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kitPool);
-        }
-
-
 
         protected override void Dispose(bool disposing)
         {
