@@ -1,4 +1,5 @@
-﻿@model Kit.Server.Models.KitPool
+﻿@using System.Globalization
+@model Kit.Server.Models.KitPool
 
 
 @{
@@ -14,34 +15,27 @@
             <th>Bead</th>
             <th>Probe</th>
         </tr>
-        @{ var c = Model.KitConjugations.First(kc => kc.Id == 1);
+        @{ var c = Model.KitConjugations;
          string displaybead = "";}
 
-        @foreach (var item in Model.KitConjugations.Where(kc => kc.Bead == c.Bead))
+        @foreach (var item in Model.KitConjugations)
         {
             <tr>
                 <td>
-                    @{var conjugation = item;}
-                    @{if (conjugation.Bead != c.Bead)
-                    {
-                        c.Bead = conjugation.Bead;
-                        @Html.ActionLink(c.Bead.ToString(), "BeadDetail", new { id = item.Id })
-                    }
-                    }
-                </td>
+                    @Html.ActionLink(item.Bead.ToString(CultureInfo.InvariantCulture), "BeadDetail", new { id = item.Id })
                 <td>
                     <div class="dynamicbar txt-color-greenDark hidden-mobile hidden-md hidden-sm"><i class="fa fa-spinner fa-spin"></i></div>
                 </td>
 
                 <td>
-                    @Html.ActionLink(conjugation.ProbeName, "index", new { id = item.Id })
+                    @Html.ActionLink(item.ProbeName, "index", new { id = item.Id })
                 </td>
 
 
                 <td>
-                    @Html.ActionLink("Edit", "index", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "index", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "index", new { id = item.Id })
+                    @Html.ActionLink("Troubleshoot", "index", new { id = item.Id }) |
+                    @Html.ActionLink("Confirm", "index", new { id = item.Id }) |
+                    @Html.ActionLink("Specificity", "index", new { id = item.Id })
                 </td>
             </tr>
         }

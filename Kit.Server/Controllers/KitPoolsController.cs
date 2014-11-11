@@ -135,12 +135,38 @@ namespace Kit.Server.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KitPool kitPool = db.KitPools.Find(id);
-            if (kitPool == null)
+
+            var pools = db.KitPools.ToList();
+
+            foreach (var kitpool in pools)
             {
-                return HttpNotFound();
+                var conjugations = kitpool.KitConjugations.ToList();
+                var conjugation = conjugations.Find(c => c.Id == id);
+                if (conjugation != null)
+                {
+                    var bead = conjugation.Bead;
+                    var pool = new KitPool() {Id = kitpool.Id,KitName=kitpool.KitName,KitConjugations = new List<KitConjugation>(kitpool.KitConjugations.Where(kp=>kp.Bead==bead))};
+                    return View(pool);
+                }
             }
-            return View(kitPool);
+            
+                return HttpNotFound();
+            
+
+
+            //var kitconjugations = db.KitPools.Select(kc => kc.KitConjugations).ToList();
+            //KitConjugation conjugation = null;
+            //foreach (var kitconjugation in kitconjugations)
+            //{
+            //    conjugation = kitconjugation.Find(c => c.Id == id);
+            //    if (conjugation != null) break;
+            //}
+
+            //if (conjugation == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View();
         }
 
 
